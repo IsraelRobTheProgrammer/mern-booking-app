@@ -2,6 +2,7 @@ import { useLocation } from "react-router-dom";
 import { format } from "date-fns";
 import { useState } from "react";
 import { DateRange } from "react-date-range";
+import "./searchList.css";
 
 const SearchList = () => {
   const location = useLocation();

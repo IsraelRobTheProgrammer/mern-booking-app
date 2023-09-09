@@ -2,6 +2,7 @@ import "./list.css";
 import Header from "../../components/header/Header";
 import NavBar from "../../components/navbar/NavBar";
 import SearchList from "../../components/searchList/SearchList";
+import SearchRes from "../../components/searchResults/SearchRes";
 
 const List = () => {
   return (
@@ -12,7 +13,13 @@ const List = () => {
         <div className="listWrapper">
           <SearchList />
 
-          <div className="listResult"></div>
+          <div className="listResult">
+            <SearchRes />
+            <SearchRes />
+            <SearchRes />
+            <SearchRes />
+            <SearchRes />
+          </div>
         </div>
       </div>
     </div>
