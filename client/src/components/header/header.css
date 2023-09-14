@@ -4,13 +4,14 @@
   display: flex;
   justify-content: center;
   position: relative;
+
 }
 
 .headerContainer {
   width: 100%;
   max-width: 1024px;
   margin: 20px 0px 100px 0px;
-  /* padding-left: 10px; */
+  
 }
 
 .headerContainer.listMode {
@@ -20,6 +21,7 @@
 .headerList {
   display: flex;
   gap: 40px;
+  margin-bottom: 50px;
 }
 
 .headerListItems {
@@ -95,7 +97,7 @@
   background-color: white;
   color: gray;
   border-radius: 10px;
-  border: 2px solid gray;
+  /* border: 2px solid gray; */
   -webkit-box-shadow: 0px 0px 10px -5px rgba(0, 0, 0, 0.4);
   box-shadow: 0px 0px 10px -5px rgba(0, 0, 0, 0.4);
 }

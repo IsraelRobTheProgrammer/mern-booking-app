@@ -51,9 +51,10 @@
   color: #008009;
 }
 
-.hotelImages {
+.hotelImgs {
   display: flex;
   flex-wrap: wrap;
+  /* background-color: red; */
   justify-content: space-between;
 }
 
@@ -133,9 +134,9 @@
   justify-content: center;
 }
 
-sliderImg {
+.sliderImg {
   width: 80%;
-  height: 80vh;
+  height: 100vh;
 }
 
 .close {
