@@ -1,11 +1,18 @@
 import User from "../models/Users.js";
+import bcrypt from "bcryptjs";
+import { createError } from "../utils/AppError.js";
+import jwt from "jsonwebtoken";
 
 export const register = async (req, res, next) => {
   const { username, email, password } = req.body;
-//   console.log(username, email, password);
+  //   console.log(username, email, password);
   try {
-    const newUser = new User({ username, email, password });
+    const salt = bcrypt.genSaltSync(10);
+    const hashPwd = bcrypt.hashSync(req.body.password, salt);
+
+    const newUser = new User({ username, email, password: hashPwd });
     await newUser.save();
+    // res.redirect("/")
     res.status(201).json("User Has been created");
   } catch (err) {
     next(err);
@@ -13,5 +20,24 @@ export const register = async (req, res, next) => {
 };
 
 export const login = async (req, res, next) => {
-  res.send("Hello From Auth reg Route");
+  try {
+    const user = await User.findOne({ username: req.body.username });
+    if (!user) return next(createError(400, "Credentials Invalid User"));
+
+    const isPwdCorect = await bcrypt.compare(req.body.password, user.password);
+    if (!isPwdCorect) return next(createError(400, "Credentials Invalid"));
+
+    const token = jwt.sign(
+      { id: user._id, isAdmin: user.isAdmin },
+      process.env.JWT_SECRET
+    );
+    const { password, isAdmin, ...otherData } = user._doc;
+
+    res
+      .cookie("access_token", token, { httpOnly: true })
+      .status(200)
+      .json({ ...otherData });
+  } catch (err) {
+    next(err);
+  }
 };

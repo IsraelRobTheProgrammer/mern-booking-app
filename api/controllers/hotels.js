@@ -1,5 +1,4 @@
 import Hotel from "../models/Hotels.js";
-import { createError } from "../utils/AppError.js";
 
 export const createHotel = async (req, res, next) => {
   const newHotel = new Hotel(req.body);
@@ -12,9 +11,9 @@ export const createHotel = async (req, res, next) => {
 };
 
 export const updateHotel = async (req, res, next) => {
-  const failed = true;
-  if (failed)
-    return next(createError(401, "You need to be Logged In to continue"));
+  // const failed = true;
+  // if (failed)
+  //   return next(createError(401, "You need to be Logged In to continue"));
 
   try {
     const updatedHotel = await Hotel.findByIdAndUpdate(
@@ -51,11 +50,9 @@ export const getHotel = async (req, res, next) => {
 };
 
 export const getHotels = async (req, res, next) => {
-  const { id } = req.params;
-  console.log(id);
   try {
     const foundHotels = await Hotel.find();
-    res.status(204).json(foundHotels);
+    res.status(200).json(foundHotels);
   } catch (err) {
     next(err);
   }
