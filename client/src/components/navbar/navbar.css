@@ -18,6 +18,9 @@
   font-weight: 500;
 }
 
+.logo:hover{
+  text-decoration: underline;
+}
 .navButton {
   margin-left: 20px;
   border: none;

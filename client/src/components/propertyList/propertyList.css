@@ -19,11 +19,13 @@
   object-fit: cover;
 }
 
-.pListTitle > h1 {
+.pListTitles > h1 {
   font-size: 18px;
+  color: #444;
+  text-transform: capitalize;
 }
 
-.pListTitle > h2 {
+.pListTitles > h2 {
   font-size: 14px;
-  font-weight: 300px;
+  font-weight: 300;
 }

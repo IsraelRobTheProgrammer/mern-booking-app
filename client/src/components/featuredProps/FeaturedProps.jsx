@@ -1,52 +1,42 @@
+import useFetch from "../../hooks/useFetch";
 import "./featuredProps.css";
 
 const FeaturedProps = () => {
+  const { data, loading, error } = useFetch(
+    "http://localhost:8000/api/hotels/?featured=true&limit=4"
+  );
+  console.log(data);
+
   return (
     <div className="fp">
-      <div className="fpItem">
-        <img
-          src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1d/33/b1/a3/hotel-building-exterior.jpg?w=1200&h=-1&s=1"
-          alt=""
-          className="fpImg"
-        />
-        <span className="fpName">Aparthoel Stare Dublin</span>
-        <span className="fpCity">Madrid</span>
-        <span className="fpPrice">Starting From 500000 NGN</span>
-        <div className="fpRating">
-          <button>8.9</button>
-          <span>Excellent</span>
-        </div>
-      </div>
-
-      <div className="fpItem">
-        <img
-          src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1d/33/b1/a3/hotel-building-exterior.jpg?w=1200&h=-1&s=1"
-          alt=""
-          className="fpImg"
-        />
-        <span className="fpName">Aparthoel Stare Dublin</span>
-        <span className="fpCity">Madrid</span>
-        <span className="fpPrice">Starting From 500000 NGN</span>
-        <div className="fpRating">
-          <button>8.9</button>
-          <span>Excellent</span>
-        </div>
-      </div>
-
-      <div className="fpItem">
-        <img
-          src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1d/33/b1/a3/hotel-building-exterior.jpg?w=1200&h=-1&s=1"
-          alt=""
-          className="fpImg"
-        />
-        <span className="fpName">Aparthoel Stare Dublin</span>
-        <span className="fpCity">Madrid</span>
-        <span className="fpPrice">Starting From 500000 NGN</span>
-        <div className="fpRating">
-          <button>8.9</button>
-          <span>Excellent</span>
-        </div>
-      </div>
+      {loading ? (
+        "Loading Please Wait"
+      ) : (
+        <>
+          {data &&
+            data.map((item) => (
+              <div className="fpItem" key={item._id}>
+                <img src={item.photos} alt="" className="fpImg" />
+                <span className="fpName">{item.name}</span>
+                <span className="fpCity">{item.city}</span>
+                <span className="fpPrice">
+                  Starting From {item.cheapestPrice} NGN
+                </span>
+                {item.rating ? (
+                  <div className="fpRating">
+                    <button>{item.rating}</button>
+                    <span>Excellent</span>
+                  </div>
+                ) : (
+                  <div className="fpRating">
+                    <button>No Rating Yet 😢</button>
+                    {/* <span>Excellent</span> */}
+                  </div>
+                )}
+              </div>
+            ))}
+        </>
+      )}
     </div>
   );
 };
